@@ -1,12 +1,12 @@
 name: AWS Lambda CTF
 
-# Run this script every time there is a push to the corgi branch
+#Run this script every time there is a push to the corgi branch
 on:
   push:
     branches:
       - corgi
 
-# Required permissions for GitHub to securely authenticate with AWS (OIDC)
+#Required permissions for GitHub to securely authenticate with AWS (OIDC)
 permissions:
   id-token: write
   contents: read
@@ -18,14 +18,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Use the official action to interact with AWS
-      # Request access to AWS account 009661764077
+      #Use the official action to interact with AWS
+      #Request access to AWS account 009661764077
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::009661764077:role/cicdRole
           aws-region: us-east-1
 
-      # If access is granted, run this command to find the secret Lambda
+      #If access is granted, run this command to find the secret Lambda
       - name: List Lambda Functions
         run: aws lambda list-functions
