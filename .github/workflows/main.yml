@@ -1,0 +1,31 @@
+name: AWS Lambda CTF
+
+# "תריץ את הסקריפט הזה בכל פעם שאני עושה שמירה בענף corgi"
+on:
+  push:
+    branches:
+      - corgi
+
+# הגדרת הרשאות הכרחית כדי שגיטהאב יוכל להזדהות מול AWS בצורה מאובטחת (OIDC)
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  find-secret-lambda:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # "השתמש בתוסף הרשמי כדי לדבר עם AWS"
+      # "תבקש גישה לחשבון שמספרו 009661764077"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::009661764077:role/YOUR_ROLE_NAME_HERE
+          aws-region: us-east-1
+
+      # "אם קיבלת גישה, תריץ את הפקודה כדי למצוא את הלמבדה הסודית"
+      - name: List Lambda Functions
+        run: aws lambda list-functions
