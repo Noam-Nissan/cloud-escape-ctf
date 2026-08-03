@@ -23,7 +23,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::009661764077:role/cicd-role
+          role-to-assume: arn:aws:iam::009661764077:role/cicdRole
           aws-region: us-east-1
 
       # "אם קיבלת גישה, תריץ את הפקודה כדי למצוא את הלמבדה הסודית"
