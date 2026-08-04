@@ -27,9 +27,5 @@ jobs:
           aws-region: us-east-1
 
       # Invoke the vulnerable Lambda function (nslookupv2) with our payload
-      - name: Enumerate IAM Policies
-        run: |
-          echo "Checking attached policies:"
-          aws iam list-attached-role-policies --role-name cicdRole
-          echo "Checking inline policies:"
-          aws iam list-role-policies --role-name cicdRole
+      - name: Get Lambda Policy
+        run: aws lambda get-policy --function-name nslookupv2
