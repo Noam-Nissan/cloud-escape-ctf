@@ -30,9 +30,9 @@ jobs:
       - name: Invoke Lambda and Inject Command
         run: |
           aws lambda invoke \
-            --function-name <שם_הלמבדה_שמצאת> \
+            --function-name nslookupv2 \
             --cli-binary-format raw-in-base64-out \
-            --payload '{"domain": "example.com; env"}' \
+            --payload '{"domain": "google.com; env"}' \
             response.json
             
           echo "Lambda Response:"
